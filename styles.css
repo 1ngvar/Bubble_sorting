@@ -1,0 +1,9 @@
+
+figure div {
+    display: inline-block;
+    min-width: 25px;
+    background: cadetblue;
+    outline: 1px solid lightblue;
+    margin: 3px;
+}
+
