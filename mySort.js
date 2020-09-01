@@ -1,4 +1,14 @@
-const myArray = [2, 1, 3, 3, 2, 4, 3, 6, 5, 4, 7, 8, 6, 5, 4, 44, 33, 4, 2, 56]
+const inputArray = prompt('Для построения графика введите числа, разделённые запятыми. \nНечисловые значения будут приравнены к 0.',
+    [2, 1, 3, 3, 2, 4, 3, 6, 5, 4, 7, 8, 6, 5, 4, 44, 33, 4, 2, 56]).split(',')
+    .map(x=> +x || 0 )
+
+
+bubbleSorting(inputArray)
+
+
+
+
+// Functions declarations
 
 function createFigure(array) {
 
@@ -7,17 +17,28 @@ function createFigure(array) {
     // Creating a div for every array element
     for (let i = 0; i < array.length; i++) {
 
-        let bar = document.createElement("div")
+        let bar = createDivBar(array[i])
 
         // Setting it's id according to the element's position in an array
         bar.setAttribute("id", i)
 
-        // Setting it's height according to the element's value multiplied by 5
-        bar.style.height = array[i] * 5 + "px"
-
+        // Adding a div bar to a <figure>
         figure[0].appendChild(bar)
-
     }
+}
+
+
+function createDivBar(arrayItem) {
+
+    let div = document.createElement("div")
+
+    // Printing array numbers over their respective bars
+    div.innerText = arrayItem
+
+    // Setting div's height according to the element's value multiplied by 5 for better visibility
+    div.style.height = arrayItem * 5 + "px"
+
+    return div
 }
 
 
@@ -35,14 +56,5 @@ function bubbleSorting(arr) {
             }
         }
     }
-    // return arr
     createFigure(arr)
 }
-
-
-
-    createFigure(myArray)
-
-    bubbleSorting(myArray)
-
-// console.log("Sorted array: " + bubbleSorting(myArray))

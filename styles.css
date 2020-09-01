@@ -1,9 +1,14 @@
-
 figure div {
     display: inline-block;
     min-width: 25px;
     background: cadetblue;
     outline: 1px solid lightblue;
     margin: 3px;
+    overflow: hidden;
+    color: aliceblue;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
 }
 
