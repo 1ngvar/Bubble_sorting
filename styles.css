@@ -1,4 +1,8 @@
-figure div {
+figure { min-height: 25px }
+
+figure div  {
+    will-change: transform, opacity;
+
     display: inline-block;
     min-width: 25px;
     background: cadetblue;
@@ -10,5 +14,28 @@ figure div {
     font-weight: bold;
     font-size: 11px;
     text-align: center;
+
+    transition: opacity 2s, height 3s;
 }
 
+figure div:hover {
+    cursor: pointer;
+}
+
+
+ h2 {
+    opacity: 0;
+
+    font-family: 'Lato', "Open Sans", sans-serif;
+    font-weight: normal;
+    color: lightslategray;
+    padding-left: 40px;
+
+     transition: opacity 1s;
+
+ }
+
+.swal2-input, .swal2-content {
+    font-size: 1em !important;
+    font-family: 'Lato', "Open Sans", sans-serif;
+}
