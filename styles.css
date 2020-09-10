@@ -39,3 +39,6 @@ figure div:hover {
     font-size: 1em !important;
     font-family: 'Lato', "Open Sans", sans-serif;
 }
+
+
+button.swal2-confirm { background-color: #5f9ea0 !important; }

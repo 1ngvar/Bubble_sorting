@@ -17,20 +17,19 @@ Swal.fire({
 }).then((result) => { if (result.value) { renderArray(result.value) } });
 
 
-
 /*
     Variables declaration
-
-const inputArray = prompt('Для построения графика введите числа, разделённые запятыми.\n Нечисловые значения будут приравнены к 0.',
-    [63, 1, 3, 20, 74, 4, 35, 6, 5, 28, 7, 8, 6, 5, 4, 44, 33, 4, 2, 56]).split(',')
-    .map(x=> +x || 0 )
 */
+
 const figure = document.getElementsByTagName("figure")
 const allDivs = document.getElementsByTagName("div")
 const title = document.getElementById("title")
 
+let multiplier = 5
 
-// createFigure(inputArray)
+// Tracking the state of an array to forbid sorting it more than once to avoid some problems
+window.sorted = false
+
 
 
 /*
@@ -41,8 +40,8 @@ function renderArray(inputString) {
     window.inputArray = inputString.split(',').map(x=> +x || 0 );
     createFigure(inputArray);
     console.log("inputString: " +  inputString);
-
 }
+
 
 function bubbleSorting(arr) {
     let temp
@@ -70,14 +69,13 @@ function createFigure(array) {
         let bar = createDivBar(array[i])
 
         bar.onclick = zeroOutDivs
-
+        
         figure[0].appendChild(bar)
     }
 
     // Fading the title in
     setTimeout(() => {
         title.style.opacity = 1
-        // title.style.opacity = 0 ? title.style.opacity = 1 : title.style.opacity = 0
     }, 3000);
 }
 
@@ -95,8 +93,8 @@ function createDivBar(arrayItem) {
 
 
     setTimeout(() => {
-        // Setting div's height according to the element's value multiplied by 5 for better visibility
-        div.style.height = arrayItem * 5 + "px"
+        // Setting div's height according to the element's value multiplied by a custom multiplier for better visibility
+        div.style.height = arrayItem * multiplier + "px"
         div.style.opacity = 1
     }, 100)
 
@@ -106,20 +104,35 @@ function createDivBar(arrayItem) {
 
 function zeroOutDivs() {
 
-    for (div of allDivs) { div.style.height = "11px"; }
+    if (!window.sorted) {
 
-    // Fading out the title
-    setTimeout(() => { title.style.opacity = 0  }, 1000);
+        for (div of allDivs) {
+            div.style.height = "11px";
+        }
 
-    // Fading out old divs
-    setTimeout(() => {  for (div of allDivs) { div.style.opacity = "0"; }  }, 2000);
+        // Fading out the title
+        setTimeout(() => {
+            title.style.opacity = 0
+        }, 1000);
+
+        // Fading out old divs
+        setTimeout(() => {
+            for (div of allDivs) {
+                div.style.opacity = "0";
+            }
+        }, 2000);
 
 
-    // Deleting them
-    setTimeout(() => figure[0].innerHTML = '', 3000);
+        // Deleting them
+        setTimeout(() => figure[0].innerHTML = '', 3000);
 
-    // Creating a brand new Figure
-    setTimeout(() => { bubbleSorting(inputArray) }, 4000)
+        // Creating a brand new Figure
+        setTimeout(() => {
+            bubbleSorting(inputArray)
+        }, 4000)
+
+        window.sorted = true
+    }
 }
 
 
