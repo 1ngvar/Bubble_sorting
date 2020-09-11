@@ -3,6 +3,8 @@ figure { min-height: 25px }
 figure div  {
     will-change: transform, opacity;
 
+    max-height: 550px;
+
     display: inline-block;
     min-width: 25px;
     background: cadetblue;

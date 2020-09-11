@@ -5,7 +5,7 @@
 Swal.fire({
     input: 'text',
     inputValue: '63, 1, 3, 20, 74, 4, 35, 6, 5, 28, 7, 8, 6, 5, 4, 44, 33, 4, 2, 56',
-    html: 'Введите числа, разделённые запятыми.<br/> Нечисловые значения будут приравнены к 0.',
+    html: 'Введите числа, разделённые запятыми.<br/> Нечисловые значения будут приравнены к 0. <br/> Максимальная высота столбца ограничена 550 px',
     icon: 'info',
     confirmButtonText: 'Готово!',
     backdrop: `
@@ -25,8 +25,6 @@ const figure = document.getElementsByTagName("figure")
 const allDivs = document.getElementsByTagName("div")
 const title = document.getElementById("title")
 
-let multiplier = 5
-
 // Tracking the state of an array to forbid sorting it more than once to avoid some problems
 window.sorted = false
 
@@ -38,6 +36,10 @@ window.sorted = false
 
 function renderArray(inputString) {
     window.inputArray = inputString.split(',').map(x=> +x || 0 );
+
+    const maxValue = Math.max(...inputArray)
+    // console.log("maxValue is " + maxValue);
+
     createFigure(inputArray);
     console.log("inputString: " +  inputString);
 }
@@ -69,7 +71,7 @@ function createFigure(array) {
         let bar = createDivBar(array[i])
 
         bar.onclick = zeroOutDivs
-        
+
         figure[0].appendChild(bar)
     }
 
@@ -94,7 +96,7 @@ function createDivBar(arrayItem) {
 
     setTimeout(() => {
         // Setting div's height according to the element's value multiplied by a custom multiplier for better visibility
-        div.style.height = arrayItem * multiplier + "px"
+        div.style.height = arrayItem * 5 + "px"
         div.style.opacity = 1
     }, 100)
 
